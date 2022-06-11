@@ -1,1 +1,12 @@
 
+Charter: Exploratory testing on the APIs of the Pet.
+Areas: Add a new Pet, Get Pet by id, Get Pet by tag and Delete a pet.
+Start: 10 June 2022
+Tester: Maaz Ahmed Khan
+Task Breakdown:
+Duration: (90-120 mins).
+Test Design and Execution: 1 hr.
+Session setup: 2 hr.
+Data files: any data that was gathered during the test, such as screen recordings, or screen shots. The path to this is acceptable
+Test Notes: Firstly, Add a new pet api is tested then Get a pet using id and tag is tested and lastly, Delete a pet testing is performed.
+Bugs: No bug found in my coverage
