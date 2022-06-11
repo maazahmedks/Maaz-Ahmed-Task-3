@@ -3,7 +3,7 @@ Charter: Exploratory testing on the APIs of the Pet.
 Areas: Add a new Pet, Get Pet by id, Get Pet by tag and Delete a pet.
 Start: 10 June 2022
 Tester: Maaz Ahmed Khan
-Task Breakdown:
+Task Breakdown: Firstly, a framework is setup then Helper classes are created then utilities folder is created contain database connection, query and in the end a folder is created having testcases.
 Duration: (90-120 mins).
 Test Design and Execution: 1 hr.
 Session setup: 2 hr.
