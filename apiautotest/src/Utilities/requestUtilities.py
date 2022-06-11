@@ -22,23 +22,31 @@ class RequestUtility(object):
         f"URL {self.usrl}, Response JSON: {self.rs_json}"
 
 
-    def apost(self, endpoint, payload=None, headers=None, expected_status_code=201):
-        if not headers:
-           headers = {"Content-Type": "application/json"}
+    def apost(self, endpoint, payload=None, headers=None, expected_status_code=800):
+         if not headers:
+            headers = {"Content-Type": "application/json"}
 
-      #  auth=OAuth1("ck_e52a044bb0a207b76b1a76a25f4c3e4976dea27b", "cs_2b8c791882b81d5ee0cc44ca9e9ad8bad44ad042")
+         self.usrl = self.base_url + endpoint
 
-        self.usrl= self.base_url + endpoint
+         rs_api = requests.post(url=self.usrl, data=json.dumps(payload), headers=headers, auth=self.auth)
+         logger.debug(f"POST API Response: {rs_api.json()}")
+         response_dict = json.loads(rs_api.text)
+         # response_dict['message']
 
-        rs_api=requests.post(url=self.usrl, data=json.dumps(payload), headers=headers, auth=self.auth)
-        import pdb; pdb.set_trace()
-        self.st=rs_api.status_code
-        self.expected_status_code2 = expected_status_code
-        self.rs_json=rs_api.json()
+  #       import pdb
+  #       pdb.set_trace()
 
-        self.assert_status()
-        logger.debug(f"POST API Response: {rs_api.json()}")
-        return self.rs_json
+         self.st = rs_api.status_code
+         self.expected_status_code2 = expected_status_code
+         self.rs_json = rs_api.json()
+
+      #   self.assert_status()
+#         logger.debug(f"POST API Response: {rs_api.json()}")
+
+#         assert self.st == 200
+#         assert response_dict['message'] == 'User Access Token successfully generated and saved into database.'
+         return self.rs_json
+
 
 
     def get(self, endpoint, payload=None, headers=None, expected_status_code=200):
@@ -48,10 +56,24 @@ class RequestUtility(object):
 
         self.usrl= self.base_url + endpoint
         rs_api=requests.get(url=self.usrl, data=json.dumps(payload), headers=headers, auth=self.auth)
-        self.st=rs_api.status_code
-        self.expected_status_code2 = expected_status_code
+        #self.st=rs_api.status_code
+        #self.expected_status_code2 = expected_status_code
         self.rs_json=rs_api.json()
-
-        self.assert_status()
-        logger.debug(f"GET API Response: {rs_api.json()}")
+        #self.assert_status()
+        #logger.debug(f"GET API Response: {rs_api.json()}")
         return self.rs_json
+
+
+    def delete(self, endpoint, payload=None, headers=None, expected_status_code=200):
+
+        if not headers:
+           headers = {"Content-Type": "application/json"}
+
+        self.usrl= self.base_url + endpoint
+        rs_api=requests.delete(url=self.usrl, data=json.dumps(payload), headers=headers, auth=self.auth)
+        #str=rs_api.status_code
+        # import pdb;        pdb.set_trace()
+        data2 = dict()
+        data2['code']=rs_api.status_code
+        data2['message']=rs_api.text
+        return data2
